@@ -1,0 +1,98 @@
+﻿# Разворачиваем и запускаем новую виртуальную машину Ubuntu 16 with MySQL 5.7 на VirtualBox.
+# 
+
+# Проверяем версии MySQL и клиента
+student@Ubuntu-MySQL-VirtualBox:~$ mysqld --version
+mysqld  Ver 5.7.25-0ubuntu0.16.04.2 for Linux on x86_64 ((Ubuntu))
+student@Ubuntu-MySQL-VirtualBox:~$ mysql --version
+mysql  Ver 14.14 Distrib 5.7.25, for Linux (x86_64) using  EditLine wrapper
+
+# Подключаемся через консольный клиент
+student@Ubuntu-MySQL-VirtualBox:~$ mysql -u root -p
+Enter password: 
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 3
+Server version: 5.7.25-0ubuntu0.16.04.2 (Ubuntu)
+
+Copyright (c) 2000, 2019, Oracle and/or its affiliates. All rights reserved.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> SHOW DATABASES;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| sys                |
++--------------------+
+4 rows in set (0,00 sec)
+
+mysql> USE mysql;
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Database changed
+mysql> SHOW TABLES;
++---------------------------+
+| Tables_in_mysql           |
++---------------------------+
+| columns_priv              |
+| db                        |
+| engine_cost               |
+| event                     |
+| func                      |
+| general_log               |
+| gtid_executed             |
+| help_category             |
+| help_keyword              |
+| help_relation             |
+| help_topic                |
+| innodb_index_stats        |
+| innodb_table_stats        |
+| ndb_binlog_index          |
+| plugin                    |
+| proc                      |
+| procs_priv                |
+| proxies_priv              |
+| server_cost               |
+| servers                   |
+| slave_master_info         |
+| slave_relay_log_info      |
+| slave_worker_info         |
+| slow_log                  |
+| tables_priv               |
+| time_zone                 |
+| time_zone_leap_second     |
+| time_zone_name            |
+| time_zone_transition      |
+| time_zone_transition_type |
+| user                      |
++---------------------------+
+31 rows in set (0,00 sec)
+# Запросы работают подключение прошло нормально.
+
+# Проверка работы системных команд из MySQL клиента
+mysql>  \! ls
+examples.desktop  Документы  Изображения  Общедоступные  Шаблоны
+Видео		  Загрузки   Музыка	  Рабочий стол
+mysql> \! pwd
+/home/student
+
+# Выходим из MySQL
+mysql> \q
+Bye
+
+# Для подключения к данной виртуальной машине удаленно (с хостовой машины) проверяем возможность подключения по SSH протоколу
+student@Ubuntu-MySQL-VirtualBox:~$ ps ax | grep ssh
+  797 ?        Ss     0:00 /usr/sbin/sshd -D
+ 1322 ?        SLl    0:00 gnome-keyring-daemon --start --components ssh
+ 2832 pts/4    S+     0:00 grep --color=auto ssh
+student@Ubuntu-MySQL-VirtualBox:~$ 
+
+ 
